@@ -2,7 +2,7 @@ import { Link, Form, redirect } from "react-router-dom";
 import classes from "./NewStock.module.css";
 import Modal from "../components/Modal";
 import { Outlet } from "react-router-dom";
-import Sams from "../assets/Like.png";
+import Sams from "../assets/Khaleej.png";
 
 function NewBill() {
   return (
@@ -135,7 +135,7 @@ export async function action({ request }) {
   const formData = await request.formData(); // data from form
   const postData = Object.fromEntries(formData); // { CatNam: '...', CatNum: '...' }
 
-  await fetch("http://localhost:3000/api/v1/bill/validate", {
+  await fetch("http://localhost:4000/api/v1/bill/validate", {
     method: "POST",
     body: JSON.stringify(postData),
     headers: {
@@ -146,7 +146,7 @@ export async function action({ request }) {
     if (!response.ok) alert("Maybe stock is insufficient");
     else {
       //
-      const rateResponse = await fetch("http://localhost:3000/api/v1/bill/findRate", {
+      const rateResponse = await fetch("http://localhost:4000/api/v1/bill/findRate", {
         method: "POST",
         body: JSON.stringify(postData),
         headers: {
@@ -202,7 +202,7 @@ export async function action({ request }) {
 
 //-------------------------Final Submit------------------------------------
 const finalSubmit = async () => {
-  await fetch("http://localhost:3000/api/v1/bill", {
+  await fetch("http://localhost:4000/api/v1/bill", {
     method: "POST",
     body: JSON.stringify(dataToSend),
     headers: {

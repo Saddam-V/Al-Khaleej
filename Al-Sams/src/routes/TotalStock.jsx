@@ -18,7 +18,7 @@ export default TotalStock;
 
 export async function loader({ params }) {
   console.log(localStorage.getItem("token"));
-  const response = await fetch("http://localhost:3000/api/v1/totalStock?sort=".concat(params.option), {
+  const response = await fetch("http://localhost:4000/api/v1/totalStock?sort=".concat(params.option), {
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -30,7 +30,7 @@ export async function loader({ params }) {
 
 export async function searchTotalLoader({ params }) {
   console.log("in cat");
-  const response = await fetch("http://localhost:3000/api/v1/totalStock/search/" + params.cat + "/" + params.col, {
+  const response = await fetch("http://localhost:4000/api/v1/totalStock/search/" + params.cat + "/" + params.col, {
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),

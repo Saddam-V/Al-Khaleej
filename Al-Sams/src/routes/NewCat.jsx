@@ -2,7 +2,7 @@ import { Link, Form, redirect } from "react-router-dom";
 import classes from "./NewStock.module.css";
 import Modal from "../components/Modal";
 import { Outlet } from "react-router-dom";
-import Sams from "../assets/Like.png";
+import Sams from "../assets/Khaleej.png";
 
 function NewCat() {
   return (
@@ -142,7 +142,7 @@ export async function action({ request }) {
 
 //-------------------------Final Submit------------------------------------
 const finalSubmit = async () => {
-  await fetch("http://localhost:3000/api/v1/cat", {
+  await fetch("http://localhost:4000/api/v1/cat", {
     method: "POST",
     body: JSON.stringify(dataToSend),
     headers: {

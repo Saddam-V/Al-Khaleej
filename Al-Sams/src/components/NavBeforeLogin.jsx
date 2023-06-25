@@ -1,4 +1,4 @@
-import Sams from "../assets/Like.png";
+import Sams from "../assets/Khaleej.png";
 import { Link, Form, redirect } from "react-router-dom";
 
 function NavBeforeLogin() {
@@ -20,8 +20,8 @@ function NavBeforeLogin() {
           <img className="w-20 h-20 rounded-full" src={Sams} alt="image description"></img>
 
           <h1 class="mb-4 ml-14 text-lg font-extrabold text-gray-900 dark:text-black md:text-5xl lg:text-6xl">
-            LI
-            <span class="text-transparent bg-clip-text bg-gradient-to-r to-button from-emerald-600">KE</span>
+            AL
+            <span class="text-transparent bg-clip-text bg-gradient-to-r to-button from-emerald-600"> - KHALEEJ</span>
           </h1>
         </a>
         <Link

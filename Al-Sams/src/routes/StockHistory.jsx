@@ -18,7 +18,7 @@ export default StockHistory;
 
 export async function loader({ params }) {
   console.log("in Option");
-  const response = await fetch("http://localhost:3000/api/v1/stockHistory?sort=".concat(params.option), {
+  const response = await fetch("http://localhost:4000/api/v1/stockHistory?sort=".concat(params.option), {
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -31,7 +31,7 @@ export async function loader({ params }) {
 
 export async function searchLoader({ params }) {
   console.log("in cat");
-  const response = await fetch("http://localhost:3000/api/v1/stockHistory/search/" + params.cat + "/" + params.col, {
+  const response = await fetch("http://localhost:4000/api/v1/stockHistory/search/" + params.cat + "/" + params.col, {
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),

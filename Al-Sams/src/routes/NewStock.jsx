@@ -50,7 +50,7 @@ export async function action({ request }) {
   const formData = await request.formData();
   const postData = Object.fromEntries(formData); // { CatNam: '...', CatNum: '...' }
   console.log(postData);
-  await fetch("http://localhost:3000/api/v1/stockHistory", {
+  await fetch("http://localhost:4000/api/v1/stockHistory", {
     method: "POST",
     body: JSON.stringify(postData),
     headers: {
