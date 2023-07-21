@@ -63,6 +63,7 @@ export async function action({ request }) {
       if (response.status === 201) alert("New Stock Created");
       else if (response.status === 200) alert("Updated");
     }
+    document.getElementById("submit_button").disabled = false;
   });
   // .then((data) => {
   //   this.setState({ isLoading: false, downlines: data.response });
