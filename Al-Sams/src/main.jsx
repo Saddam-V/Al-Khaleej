@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
 import StockHistory, { loader as stocksHistoryLoader, searchLoader as stockSearchLoader } from "./routes/StockHistory";
-import TotalStock, { loader as totalStocksLoader, searchTotalLoader as totalSearchLoader } from "./routes/TotalStock";
+import TotalStock, { loader as totalStocksLoader, searchTotalLoader as totalSearchLoaderd } from "./routes/TotalStock";
+import SearchStock, { searchTotalLoader as totalSearchLoader } from "./routes/SearchStock";
 import NewStock, { action as newStockAction } from "./routes/NewStock";
 import NewBill, { action as newBillAction } from "./routes/NewBill";
 import BillHistory, { loader as billHistoryLoader, searchLoader as billSearchLoader } from "./routes/BillHistory";
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
         action: newLoginAction,
       },
       {
-        path: "/stockHistory/:option?",
+        path: "/stockHistory/:option?/:page?/:limit?",
         element: <StockHistory />,
         loader: stocksHistoryLoader,
       },
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/total-stock/search/:cat?/:col?",
-        element: <TotalStock />,
+        element: <SearchStock />,
         loader: totalSearchLoader,
       },
       { path: "/billHistory/:option?", element: [<BillHistory />], loader: billHistoryLoader }, //
@@ -59,7 +60,8 @@ const router = createBrowserRouter([
 
       { path: "/customer/:option?", element: [<Customer />], loader: customerLoader },
       { path: "/customer/search/:cat?", element: [<Customer />], loader: customerSearchLoader },
-      { path: "/total-stock/:option?", element: [<TotalStock />], loader: totalStocksLoader },
+      { path: "/total-stock/:option?/:page?/:limit?", element: [<TotalStock />], loader: totalStocksLoader },
+      // { path: "/total-stock/page/:option?", element: [<TotalStock />], loader: totalStocksLoader },
       // {
       //   path: "/stock/success",
       //   element: [<Alert />, <NewStock />],

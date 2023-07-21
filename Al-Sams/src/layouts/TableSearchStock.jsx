@@ -27,9 +27,9 @@ function Table() {
               <th scope="col" className="px-6 py-3">
                 Meter
               </th>
-              <th scope="col" className="px-6 py-3">
+              {/* <th scope="col" className="px-6 py-3">
                 Total Sold
-              </th>
+              </th> */}
               <th scope="col" className="px-6 py-3">
                 Created At
               </th>
@@ -44,7 +44,7 @@ function Table() {
                   catNum={post.catNum}
                   colNum={post.colNum}
                   meter={post.meter}
-                  totalSold={post.totalSold}
+                  // totalSold={post.totalSold}
                   // rate={post.rate}
                   createdAt={post.startDates}
                 />

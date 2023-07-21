@@ -12,14 +12,18 @@ function ButtonGroup() {
   function searchFunc() {
     let val = document.getElementById("simple-search").value;
     const valArray = val.split(" ");
-    console.log("Searching...");
-    if (path.includes("total-stock")) {
-      navigate("/total-stock/search/" + valArray[0] + "/" + valArray[1]);
-    } else if (path.includes("stockHistory")) {
-      navigate("/stockHistory/search/" + valArray[0] + "/" + valArray[1]);
-    }
+    // console.log("Searching...");
+    // if (path.includes("total-stock")) {
+    navigate("/total-stock/search/" + valArray[0] + "/" + valArray[1]);
+    // } else if (path.includes("stockHistory")) {
+    //   navigate("/stockHistory/search/" + valArray[0] + "/" + valArray[1]);
+    // }
   }
   function applyFilter() {
+    for (let i = 1; i < 6; i++) {
+      document.getElementById(i).disabled = false;
+      document.getElementById(i).style.backgroundColor = "#1f2937";
+    }
     if (path.includes("total-stock")) {
       if (orderInput.current.value === "AS") {
         navigate("/total-stock/" + textInput.current.value);
@@ -103,7 +107,7 @@ function ButtonGroup() {
               type="text"
               id="simple-search"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Search Catalogue"
+              placeholder="Search Total Stock"
               required
             ></input>
           </div>

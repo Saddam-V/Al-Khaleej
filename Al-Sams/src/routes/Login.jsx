@@ -38,7 +38,7 @@ export async function action({ request }) {
       "Content-Type": "application/json",
     },
   }).then(async (res) => {
-    if (!res.ok) alert("Maybe stock is insufficient");
+    if (!res.ok) alert("Something went wrong!");
     else {
       var body = await res.json();
       console.log(body);
