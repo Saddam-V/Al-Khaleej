@@ -33,7 +33,9 @@ function NewStock() {
           <input type="text" id="name" name="rate" required />
         </p> */}
         <p className="flex justify-end">
-          <button className="bg-button rounded p-3 mr-10 w-44">Submit</button>
+          <button id="submit_button" className="bg-button rounded p-3 mr-10 w-44">
+            Submit
+          </button>
           <Link className="bg-backclr text-button rounded p-3 mr-10 w-32" to="../stockHistory/-createdAt" type="button">
             Back
           </Link>
@@ -47,6 +49,7 @@ function NewStock() {
 export default NewStock;
 
 export async function action({ request }) {
+  document.getElementById("submit_button").disabled = true;
   const formData = await request.formData();
   const postData = Object.fromEntries(formData); // { CatNam: '...', CatNum: '...' }
   console.log(postData);

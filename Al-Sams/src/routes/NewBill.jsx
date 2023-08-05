@@ -63,7 +63,7 @@ function NewBill() {
           <div className="flex justify-center flex-row">
             <div id="ticket" className="ticket flex justify-center flex-col items-center">
               <div className="print_content">
-                <h2>Welcome</h2>
+                <h2 id="welcome">Welcome</h2>
                 <table>
                   <tr>
                     <td id="dt">Date : </td>
@@ -107,7 +107,9 @@ function NewBill() {
                 </table>
 
                 <p className="lastline">======================================</p>
-                <p className="centered">Thanks for your purchase!</p>
+                <p id="thankyou" className="centered">
+                  Thanks for your purchase!
+                </p>
               </div>
             </div>
           </div>
@@ -125,7 +127,7 @@ const Print = () => {
   var pri = document.getElementById("ifmcontentstoprint").contentWindow;
   pri.document.open();
   pri.document.write(
-    "<style>#billBody{text-align:center;} .headings{padding:10px;font-size:20px} #totalPrice,#custDetails{font-size:22px;font-weight: 900;margin-left:auto;margin-right:auto;text-align:center;margin-top:20px;} .lastline{margin-top:100px} .print_content{text-align:center;} #custDetails2,#mainTable{margin-left:auto;margin-right:auto;}</style>"
+    "<style>#welcome{margin-top:100px;} #billBody{text-align:center;} .headings{padding:10px;font-size:20px} #totalPrice,#custDetails{font-size:22px;font-weight: 900;margin-left:auto;margin-right:auto;text-align:center;margin-top:20px;} .lastline{margin-top:300px} .print_content{text-align:center;} #custDetails2,#mainTable{margin-left:auto;margin-right:auto;}</style>"
   );
   pri.document.write(content.innerHTML);
   pri.document.close();
