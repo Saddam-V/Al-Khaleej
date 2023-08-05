@@ -82,7 +82,7 @@ function NewBill() {
                   </tr>
                 </table>
                 <table id="mainTable">
-                  <p>==============================</p>
+                  <p>=========================</p>
                   <thead>
                     <tr id="head" className="grid grid-cols-5 mt-5">
                       <th className="headings">Cat</th>
@@ -92,21 +92,21 @@ function NewBill() {
                       <th className="headings">Price</th>
                     </tr>
                   </thead>
-                  <p>==============================</p>
+                  <p>=========================</p>
                   <tbody id="billBody"></tbody>
                 </table>
                 <table id="custDetails2">
                   <tr className="grid grid-cols-2 gap-2">
                     <td id="discount">Discount : </td>
                   </tr>
-                  <p>==============================</p>
+                  <p>=========================</p>
                   <tr className="grid grid-cols-2 gap-2 font-bold">
                     <td id="totalPrice">Total Amount : </td>
                   </tr>
-                  <p>==============================</p>
+                  <p>=========================</p>
                 </table>
 
-                <p className="lastline">==============================</p>
+                <p className="lastline">=========================</p>
                 <p id="thankyou" className="centered">
                   Thanks for your purchase!
                 </p>
