@@ -9,7 +9,7 @@ function Login() {
       <Form method="post" className={classes.form}>
         <p className="grid grid-cols-2 mb-5">
           <label htmlFor="name">Email</label>
-          <input type="email" id="name" name="email" required />
+          <input type="text" id="name" name="email" required />
         </p>
         <p className="grid grid-cols-2 mt-5">
           <label htmlFor="name">Password</label>

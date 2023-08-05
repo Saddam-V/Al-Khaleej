@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.route("/").get(authController.protect, billController.getAllBill).post(authController.protect, billController.createBill);
 router.route("/search/:cat").get(authController.protect, billController.getBillSearch);
+router.route("/getBillNum").get(authController.protect, billController.getBillNum);
 
 router.route("/validate").post(authController.protect, billController.validateData);
 router.route("/getNumber/:custName/:custNum?").post(authController.protect, billController.getNumber);

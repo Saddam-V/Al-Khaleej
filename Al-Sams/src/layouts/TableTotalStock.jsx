@@ -43,7 +43,7 @@ function Table() {
                   key={post._id}
                   catNum={post.catNum}
                   colNum={post.colNum}
-                  meter={post.meter}
+                  meter={post.meter.toFixed(2)}
                   totalSold={post.totalSold}
                   // rate={post.rate}
                   createdAt={post.startDates}

@@ -62,36 +62,53 @@ function NewBill() {
         <div className="bg-emerald-600 bg-opacity-20 ml-44 mr-44">
           <div className="flex justify-center flex-row">
             <div id="ticket" className="ticket flex justify-center flex-col items-center">
-              {/* <img className="w-20 h-20 rounded-full" src={Sams} alt="image description"></img> */}
-              <table id="custDetails">
-                <tr className="grid grid-cols-2 gap-2">
-                  <td id="custnm">Customer Name : </td>
-                </tr>
-                <tr className="grid grid-cols-2 gap-2">
-                  <td id="custnum">Customer Number : </td>
-                </tr>
-              </table>
-              <table>
-                <thead>
-                  <tr className="grid grid-cols-5 mt-5">
-                    <th className="">C.Num</th>
-                    <th className="">Col.Num</th>
-                    <th className="">Meter</th>
-                    <th className="">Rate</th>
-                    <th className="">Price</th>
+              <div className="print_content">
+                <h2>Welcome</h2>
+                <table>
+                  <tr>
+                    <td id="dt">Date : </td>
                   </tr>
-                </thead>
-                <tbody id="billBody"></tbody>
-              </table>
-              <table id="custDetails2">
-                <tr className="grid grid-cols-2 gap-2">
-                  <td id="discount">Discount : </td>
-                </tr>
-                <tr className="grid grid-cols-2 gap-2">
-                  <td id="totalPrice">Total : </td>
-                </tr>
-              </table>
-              <p className="centered">Thanks for your purchase!</p>
+                  <tr>
+                    <td id="billNum">Bill No : </td>
+                  </tr>
+                </table>
+                {/* <img className="w-20 h-20 rounded-full" src={Sams} alt="image description"></img> */}
+                <table id="custDetails">
+                  <tr className="grid grid-cols-2 gap-2 font-bold">
+                    <td id="custnm">Customer Name : </td>
+                  </tr>
+                  <tr className="grid grid-cols-2 gap-2 font-bold">
+                    <td id="custnum">Phone Number : </td>
+                  </tr>
+                </table>
+                <table id="mainTable">
+                  <p>======================================</p>
+                  <thead>
+                    <tr id="head" className="grid grid-cols-5 mt-5">
+                      <th className="headings">Cat</th>
+                      <th className="headings">Col</th>
+                      <th className="headings">Meter</th>
+                      <th className="headings">Rate</th>
+                      <th className="headings">Price</th>
+                    </tr>
+                  </thead>
+                  <p>======================================</p>
+                  <tbody id="billBody"></tbody>
+                </table>
+                <table id="custDetails2">
+                  <tr className="grid grid-cols-2 gap-2">
+                    <td id="discount">Discount : </td>
+                  </tr>
+                  <p>======================================</p>
+                  <tr className="grid grid-cols-2 gap-2 font-bold">
+                    <td id="totalPrice">Total Amount : </td>
+                  </tr>
+                  <p>======================================</p>
+                </table>
+
+                <p className="lastline">======================================</p>
+                <p className="centered">Thanks for your purchase!</p>
+              </div>
             </div>
           </div>
           <iframe id="ifmcontentstoprint" className="h-0 w-0 absolute"></iframe>
@@ -107,6 +124,9 @@ const Print = () => {
   var content = document.getElementById("ticket");
   var pri = document.getElementById("ifmcontentstoprint").contentWindow;
   pri.document.open();
+  pri.document.write(
+    "<style>#billBody{text-align:center;} .headings{padding:10px;font-size:20px} #totalPrice,#custDetails{font-size:22px;font-weight: 900;margin-left:auto;margin-right:auto;text-align:center;margin-top:20px;} .lastline{margin-top:100px} .print_content{text-align:center;} #custDetails2,#mainTable{margin-left:auto;margin-right:auto;}</style>"
+  );
   pri.document.write(content.innerHTML);
   pri.document.close();
   pri.focus();
@@ -161,7 +181,8 @@ export async function action({ request }) {
       dataToSend.orders.push(newData); // add data to array
       //
       const row = document.createElement("tr");
-      row.className = "grid grid-cols-5 mt-5";
+      row.className = "grid grid-cols-5 mt-5 ";
+      row.style.fontSize = "21px";
       const col1 = document.createElement("td");
       const col2 = document.createElement("td");
       const col3 = document.createElement("td");
@@ -209,22 +230,53 @@ const finalSubmit = async () => {
       "Content-Type": "application/json",
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
-  }).then((response) => {
+  }).then(async (response) => {
     if (!response.ok) alert("Maybe stock is insufficient");
     else {
+      // Getting bill number -------------------------------------------
+      const billResponse = await fetch("http://localhost:4000/api/v1/bill/getBillNum", {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      const billNo = await billResponse.json();
+      console.log("this is bill number: " + billNo.data);
+      //----------------------------------------------------------------
+
       const nm = document.createElement("td");
       const num = document.createElement("td");
+      const dt = document.createElement("td");
+      const billElement = document.createElement("td");
       const firstObj = JSON.parse(dataToSend.orders[0]);
       const custnm = document.createTextNode(firstObj.custName);
       const custnum = document.createTextNode(firstObj.custNum);
+      const billTextNode = document.createTextNode(billNo.data);
+      // date
+      const date = new Date();
+
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
+
+      // This arrangement can be altered based on how we want the date's format to appear.
+      let currentDate = `${day}-${month}-${year}`;
+      //
+      const dtn = document.createTextNode(currentDate);
       nm.appendChild(custnm);
       num.appendChild(custnum);
+      dt.appendChild(dtn);
+      billElement.appendChild(billTextNode);
       document.getElementById("custnm").appendChild(custnm);
       document.getElementById("custnum").appendChild(custnum);
+      document.getElementById("dt").appendChild(dtn);
+      document.getElementById("billNum").appendChild(billTextNode);
 
       const prc1 = calculatePrice(dataToSend.orders);
       var prc = prc1.toString();
       const tprc = document.createElement("td");
+      tprc.style.fontSize = "25px";
+      tprc.style.fontWeight = "900";
       const custprc = document.createTextNode(prc);
       tprc.appendChild(custprc);
       document.getElementById("totalPrice").appendChild(tprc);
@@ -235,11 +287,12 @@ const finalSubmit = async () => {
       document.getElementById("discount").appendChild(ds);
 
       Print();
-      Print();
       tprc.remove();
       ds.remove();
-      document.getElementById("custnm").innerHTML = "Customer Name: ";
-      document.getElementById("custnum").innerHTML = "Customer Number:  ";
+      document.getElementById("custnm").innerHTML = "Customer Name : ";
+      document.getElementById("custnum").innerHTML = "Customer Number :  ";
+      document.getElementById("dt").innerHTML = "Date :   ";
+      document.getElementById("billNum").innerHTML = "Bill No :   ";
     }
     dataToSend.orders = [];
     document.getElementById("billBody").innerHTML = "";

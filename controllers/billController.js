@@ -62,6 +62,23 @@ exports.getNumber = async (req, res) => {
   }
 };
 
+exports.getBillNum = async (req, res) => {
+  // try {
+  const billNo = fs.readFileSync("./public/bill.txt", "utf-8");
+  res.status(200).json({
+    status: "success",
+    data: billNo,
+  });
+  const newBillNum = parseInt(billNo) + 1;
+  fs.writeFileSync("./public/bill.txt", newBillNum.toString());
+  // } catch (err) {
+  //   res.status(404).json({
+  //     status: "fail",
+  //     message: err,
+  //   });
+  // }
+};
+
 exports.createBill = async (req, res) => {
   const data = req.body.orders;
   // var str = fs.readFileSync(`${__dirname}/../dev-data/billNo.txt`, "utf8"); // This will block the event loop, not recommended for non-cli programs.
